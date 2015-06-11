@@ -1,0 +1,54 @@
+{
+  "name": "Willibald",
+  "value": 80,
+  "children":
+    [
+      {
+        "name":"Veronika",
+        "value": 59,
+        "children": [
+          {
+            "name":"Ken",
+            "value": 30,
+            "children":
+              [
+                {
+                  "name":"Vienna",
+                  "value":3
+                },
+                {
+                  "name":"Hope",
+                  "value":1
+                }
+              ]
+          },
+          {
+            "name":"Chris",
+            "value":25
+          },
+          {
+            "name":"Patrick",
+            "value":22
+          },
+          {
+            "name":"Maria",
+            "value":20
+          }
+        ]
+      },
+      {
+        "name":"Ben",
+        "value": 45,
+        "children": [
+          {
+            "name":"Stephanie",
+            "value":21
+          },
+          {
+            "name":"Melissa",
+            "value":19
+          }
+        ]
+      }
+    ]
+}

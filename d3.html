@@ -8,47 +8,79 @@
 <body>
   <p>D3 basics</p>
   <script type="text/javascript">
+    // var height = 800
+    // var width = 1000
+    // var canvas = d3.select('body').append('svg')
+    //       .attr('height', height)
+    //       .attr('width', width)
+    //       .append('g')
+    //         .attr('transform', 'translate(50,50)');
+
+    // var pack = d3.layout.pack()
+    //   .size([width, height - 50])
+    //   .padding(10);
+
+    // d3.json('children_with_values.json', function(data){
+    //   var nodes = pack.nodes(data);
+    //   var node = canvas.selectAll('.node')
+    //     .data(nodes)
+    //     .enter()
+    //     .append('g')
+    //       .attr('class','node')
+    //       .attr('transform', function(d){ return 'translate(' + d.x + ',' + d.y + ')'; });
+
+    //   node.append('circle')
+    //     .attr('r', function(d){ return d.r; })
+    //     .attr('fill', 'steelblue')
+    //     .attr('fill-opacity', 0.25)
+    //     .attr('stroke', 'gray')
+    //     .attr('stroke-width', 2);
+
+    //   node.append('text')
+    //     .text(function(d){ return d.children ? '' : d.name; });
+    // })
+
     // TREE LAYOUT 2/2 (lesson 15: https://www.youtube.com/watch?v=1-n-SJJQQ0Q&list=PLw5h0DiJ-9PACJazNFIQsJw3NqcAZ5VwR&index=15)
-    var canvas = d3.select('body').append('svg')
-      .attr('width', 800)
-      .attr('height', 800)
-      .append('g')
-        .attr('transform', 'translate(100, 100)');
+    // var canvas = d3.select('body').append('svg')
+    //   .attr('width', 800)
+    //   .attr('height', 800)
+    //   .append('g')
+    //     .attr('transform', 'translate(100, 100)');
 
-    var tree = d3.layout.tree()
-          .size([600, 600]);
+    // var tree = d3.layout.tree() // swap out .tree for .cluster to have final children rendered at same level
+    //       .size([600, 600]);
 
-    d3.json('children.json', function(data){
+    // d3.json('children.json', function(data){
 
-      var nodes = tree.nodes(data);
-      var links = tree.links(nodes);
+    //   var nodes = tree.nodes(data);
+    //   var links = tree.links(nodes);
 
-      var node = canvas.selectAll('node')
-        .data(nodes)
-        .enter()
-        .append('g')
-          .attr('class', 'node')
-          .attr('transform', function(d){ return 'translate(' + d.y + ',' + d.x + ')' }) // swap d.y and d.x for top-down tree (instead of left-to-right). also change diagonal.projection below
+    //   var node = canvas.selectAll('node')
+    //     .data(nodes)
+    //     .enter()
+    //     .append('g')
+    //       .attr('class', 'node')
+    //       .attr('transform', function(d){ return 'translate(' + d.y + ',' + d.x + ')' }); // swap d.y and d.x for top-down tree (instead of left-to-right). also change diagonal.projection below
 
-      node.append('circle')
-        .attr('r', 5)
-        .attr('fill', 'steelblue')
+    //   node.append('circle')
+    //     .attr('r', 5)
+    //     .attr('fill', 'steelblue')
 
-      node.append('text')
-        .text(function(d){ return d.name });
+    //   node.append('text')
+    //     .text(function(d){ return d.name });
 
-      var diagonal = d3.svg.diagonal()
-        .projection(function(d){ return [d.y, d.x]}); // by default, projection [d.x, d.y]. we swap to have tree go left-to-right
+    //   var diagonal = d3.svg.diagonal()
+    //     .projection(function(d){ return [d.y, d.x]}); // by default, projection [d.x, d.y]. we swap to have tree go left-to-right
 
-      canvas.selectAll('.link')
-        .data(links)
-        .enter()
-        .append('path')
-          .attr('class', 'link')
-          .attr('fill', 'none')
-          .attr('stroke', 'gray')
-          .attr('d', diagonal);
-    })
+    //   canvas.selectAll('.link')
+    //     .data(links)
+    //     .enter()
+    //     .append('path')
+    //       .attr('class', 'link')
+    //       .attr('fill', 'none')
+    //       .attr('stroke', 'gray')
+    //       .attr('d', diagonal);
+    // })
 
     // TREE LAYOUT 1/2 (lesson 14: https://www.youtube.com/watch?v=7aj5BYNH5Gg&list=PLw5h0DiJ-9PACJazNFIQsJw3NqcAZ5VwR&index=13)
     // var canvas = d3.select('body').append('svg')

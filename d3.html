@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>D3 stuff</title>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/ramda/0.14.0/ramda.min.js"></script>
+</head>
+<body>
+  <p>D3 basics</p>
+  <script type="text/javascript">
+    // PATHS (lesson 11: https://www.youtube.com/watch?v=Irp5ifDeKuU&list=PLw5h0DiJ-9PACJazNFIQsJw3NqcAZ5VwR&index=11)
+    // var canvas = d3.select('body').append('svg')
+    //       .attr('width', 500)
+    //       .attr('height', 500);
+
+    // var data = [
+    //   {x: 10, y: 20},
+    //   {x: 40, y: 60},
+    //   {x: 50, y: 70}
+    // ];
+
+    // var group = canvas.append('g')
+    //               .attr('transform', 'translate(100, 100)');
+
+    // var line = d3.svg.line()
+    //       .x(function(d){ return d.x; })
+    //       .y(function(d){ return d.y; })
+
+    // group.selectAll('path')
+    //   .data([data])
+    //   .enter()
+    //   .append('path')
+    //   .attr('d', line)
+    //   .attr('fill', 'none')
+    //   .attr ('stroke', 'black')
+    //   .attr ('stroke-width', 10)
+
+    // LOADING JSON
+    // d3.json('mydata.json', function(data){ 
+
+    //   var canvas = d3.select('body').append('svg')
+    //                 .attr('width', 500)
+    //                 .attr('height', 500)
+      
+    //   canvas.selectAll('rect')
+    //     .data(data)
+    //     .enter()
+    //       .append('rect')
+    //       .attr('width', function(d){ return d.age * 8 })
+    //       .attr('height', 48)
+    //       .attr('x', 10)
+    //       .attr('y', function(d, i){ return 20 + i * 50})
+    //       .attr('fill', 'red');
+
+    //   canvas.selectAll('text')
+    //     .data(data)
+    //     .enter()
+    //       .append('text')
+    //       .attr('x', 10)
+    //       .attr('y', function(d, i){ return 45 + i * 50})
+    //       .text(function(d){ return d.name })
+    // })
+
+
+
+    // USEFUL D3 METHODS (lesson 9: https://www.youtube.com/watch?v=G1P-DawiDlQ&index=9&list=PLw5h0DiJ-9PACJazNFIQsJw3NqcAZ5VwR )
+    // var data = [10, 20, 30, 40, 50];
+    // d3.extent(data)
+    // d3.mean(data)
+    // d3.sum(data)
+    // d3.min(data)
+    // d3.max(data)
+    // data.sort(d3.ascending)
+    // data.sort(d3.descending)
+    // d3.shuffle(data)
+
+
+
+    // TRANSITIONS
+    // var canvas = d3.select('body')
+    //               .append('svg')
+    //               .attr('width', 500)
+    //               .attr('height', 500)
+
+    // var circle = canvas.append('circle')
+    //               .attr('cx', 50)
+    //               .attr('cy', 50)
+    //               .attr('r', 50)
+
+    // circle.transition()
+    //   .duration(1000)
+    //   .attr('cx', 100)
+    //   .attr('cy', 100)
+    //   .attr('fill', 'green')
+
+    //   .transition()
+    //   .duration(1000)
+    //   .attr('cx', 150)
+    //   .attr('cy', 50)
+    //   .attr('fill', 'blue')
+
+    //   .transition()
+    //   .duration(1000)
+    //   .attr('cx', 200)
+    //   .attr('cy', 100)
+    //   .attr('fill', 'red')
+
+    //   .transition()
+    //   .attr('cx', 50)
+    //   .attr('cy', 50)
+    //   .attr('fill', 'black')
+    //   .each('end', function() { d3.select(this).attr('fill', 'purple') } )
+
+
+    // ENTER/EXIT/UPDATE
+    // enter   #=>  more data elements than existing DOM elements
+    // exit    #=>  fewer data elements than DOM elements
+    // updat   #=>  same number
+    // var data = [10, 10];
+
+    // var canvas = d3.select('body')
+    //                 .append('svg')
+    //                 .attr('width', 500)
+    //                 .attr('height', 500);
+
+    // var circle1 = canvas.append('circle')
+    //                 .attr('cx', 50)
+    //                 .attr('cy', 50)
+    //                 .attr('r', 25)
+    //                 .attr('fill', 'green');
+
+    // var circle2 = canvas.append('circle')
+    //                 .attr('cx', 50)
+    //                 .attr('cy', 100)
+    //                 .attr('r', 25)
+    //                 .attr('fill', 'green');
+    
+    // var circles = canvas.selectAll('circle')
+    //               .data(data)
+    //               .update()
+    //                 .attr('fill', 'red')
+                  
+
+    // BASIC BAR CHART WITH SCALING AND AXES
+    // var width = 1000;
+    // var height = 1000;
+    // var dataArray = [20, 30, 40, 50, 60];
+
+    // var widthScale = d3.scale.linear()
+    //             .domain([0, 60])
+    //             .range([0, width]);
+
+    // var colorScale = d3.scale.linear()
+    //             .domain([0, 60])
+    //             .range(["red","blue"])
+
+    // var axis = d3.svg.axis()
+    //               .ticks(4)
+    //               .scale(widthScale);
+
+    // var canvas = d3.select('body')
+    //               .append('svg')
+    //               .attr('width', width)
+    //               .attr('height', height)
+    //               .append('g')
+    //               .attr('transform', 'translate(100,100)');
+    
+    // var bars = canvas.selectAll('rect')
+    //             .data(dataArray)
+    //             .enter() // returns placeholders for each data element for which there isn't a corresponding DOM element
+    //               .append('rect')
+    //                 .attr('width', function(d){ return widthScale(d) })
+    //                 .attr('height', 20)
+    //                 .attr('y', function(d, i) { return i * 50 })
+    //                 .attr('fill', function(d) { return colorScale(d) });
+
+    // canvas.append('g')
+    //         .attr('transform', 'translate(0, 250)')
+    //         .call(axis)
+
+
+    // EARLY CODE - APPENDING SVG ELEMENTS
+    // var barLabels = canvas.selectAll('rect')
+    //   .append('text')
+    //   .text('hi')
+    // var rect = canvas.append('rect')
+    //   .attr('width', 400)
+    //   .attr('height', 400)
+    //   .attr('fill', 'green')
+    //   .attr('x', 100);
+
+    // var circle = canvas.append('circle')
+    //   .attr('cx', 250)
+    //   .attr('cy', 250)
+    //   .attr('r', 50)
+    //   .attr('fill', 'blue');
+
+    // var line = canvas.append('line')
+    //   .attr('x1', 0)
+    //   .attr('y1', 0)
+    //   .attr('x2', 200)
+    //   .attr('y2', 200)
+    //   .attr('stroke', 'yellow')
+    //   .attr('stroke-width', 10);
+
+  </script>
+</body>
+</html>

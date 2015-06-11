@@ -1,0 +1,35 @@
+{
+  "name": "Willibald",
+  "children":
+    [
+      {
+        "name":"Veronika",
+        "children": [
+          {
+            "name":"Ken",
+            "children":
+              [
+                {"name":"Vienna"},
+                {"name":"Hope"}
+              ]
+          },
+          {
+            "name":"Chris"
+            },
+          {
+            "name":"Patrick"
+            },
+          {
+            "name":"Maria"
+          }
+        ]
+      },
+      {
+        "name":"Ben",
+        "children": [
+          {"name":"Stephanie"},
+          {"name":"Melissa"}
+        ]
+      }
+    ]
+}

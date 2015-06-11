@@ -8,6 +8,81 @@
 <body>
   <p>D3 basics</p>
   <script type="text/javascript">
+    // TREE LAYOUT 2/2 (lesson 15: https://www.youtube.com/watch?v=1-n-SJJQQ0Q&list=PLw5h0DiJ-9PACJazNFIQsJw3NqcAZ5VwR&index=15)
+    var canvas = d3.select('body').append('svg')
+      .attr('width', 800)
+      .attr('height', 800)
+      .append('g')
+        .attr('transform', 'translate(100, 100)');
+
+    var tree = d3.layout.tree()
+          .size([600, 600]);
+
+    d3.json('children.json', function(data){
+
+      var nodes = tree.nodes(data);
+      var links = tree.links(nodes);
+
+      var node = canvas.selectAll('node')
+        .data(nodes)
+        .enter()
+        .append('g')
+          .attr('class', 'node')
+          .attr('transform', function(d){ return 'translate(' + d.y + ',' + d.x + ')' }) // swap d.y and d.x for top-down tree (instead of left-to-right). also change diagonal.projection below
+
+      node.append('circle')
+        .attr('r', 5)
+        .attr('fill', 'steelblue')
+
+      node.append('text')
+        .text(function(d){ return d.name });
+
+      var diagonal = d3.svg.diagonal()
+        .projection(function(d){ return [d.y, d.x]}); // by default, projection [d.x, d.y]. we swap to have tree go left-to-right
+
+      canvas.selectAll('.link')
+        .data(links)
+        .enter()
+        .append('path')
+          .attr('class', 'link')
+          .attr('fill', 'none')
+          .attr('stroke', 'gray')
+          .attr('d', diagonal);
+    })
+
+    // TREE LAYOUT 1/2 (lesson 14: https://www.youtube.com/watch?v=7aj5BYNH5Gg&list=PLw5h0DiJ-9PACJazNFIQsJw3NqcAZ5VwR&index=13)
+    // var canvas = d3.select('body').append('svg')
+    //       .attr('width', 500)
+    //       .attr('height', 500)
+
+    // var diagonal = d3.svg.diagonal()
+    //       .source({x: 10, y: 10})
+    //       .target({x: 300, y: 300})
+
+    // canvas.append('path')
+    //   .attr('fill', 'none')
+    //   .attr('stroke', 'black')
+    //   .attr('d', diagonal)
+
+
+    // ARCS (lesson 13)
+    // var canvas = d3.select('body').append('svg')
+    //       .attr('width', 500)
+    //       .attr('height', 500)
+
+    // var group = canvas.append('g')
+    //       .attr('transform', 'translate(100, 100)')
+
+    // var arc = d3.svg.arc()
+    //       .innerRadius(90)
+    //       .outerRadius(100)
+    //       .startAngle(0)
+    //       .endAngle(3.14);
+
+    // group.append('path')
+    //   .attr('d', arc)
+
+
     // PATHS (lesson 11: https://www.youtube.com/watch?v=Irp5ifDeKuU&list=PLw5h0DiJ-9PACJazNFIQsJw3NqcAZ5VwR&index=11)
     // var canvas = d3.select('body').append('svg')
     //       .attr('width', 500)

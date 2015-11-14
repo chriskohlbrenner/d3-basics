@@ -3,11 +3,64 @@
 <head>
   <title>D3 stuff</title>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/ramda/0.14.0/ramda.min.js"></script>
 </head>
+<style type="text/css">
+    body {
+        background: #F1F1F1;
+    }
+    path:hover {
+        cursor: pointer;
+    }
+</style>
 <body>
   <p>D3 basics</p>
   <script type="text/javascript">
+    // 20. Maps in D3 (https://www.youtube.com/watch?v=lJgEx_yb4u0)
+    var canvas = d3.select("body").append("svg")
+            .attr("width", 760)
+            .attr("height", 700)
+
+    $.getJSON("name-to-abbreviation.json", function(response) {
+        var stateNames = response;
+        d3.json("usa.geojson", function(data) {
+            var colors = ["#004869", "#0e6f70", "#009398", "#00f7ff", "#023e7d", "#510661", "#084554", "#220259", "#48033d", "#1fa5c3", "#368ccd", "#19509c", "#2080c9", "#6551bc"];
+            var group = canvas.selectAll("g")
+                    .data(data.features)
+                    .enter()
+                    .append("g")
+
+            var projection = d3.geo.albersUsa().scale(1000).translate([400,300]);
+            var path = d3.geo.path().projection(projection);
+
+            var areas = group.append("path")
+                    .attr("d", path)
+                    .attr("class", "area")
+                    .attr("fill", function(d, i) {
+                        return colors[i%colors.length];
+                    })
+                    .on("mouseover",function(d,i){
+                        d3.select(this).attr("fill", "red");
+                    })
+                    .on("mouseout",function(d,i){
+                        d3.select(this).attr("fill", colors[i%colors.length]);
+                    })
+                    .on("click", function(){
+                        $(this).remove();
+                    })
+            
+            group.append("text")
+                .attr("x", function(d){ return path.centroid(d)[0]; })
+                .attr("y", function(d){ return path.centroid(d)[1]; })
+                .text(function(d) {return stateNames[d.properties["NAME"]] })
+                .attr('font-size', 6)
+                .attr('fill', 'gray')
+                .attr('text-anchor', 'middle')
+        })
+    });
+
+
     // var height = 800
     // var width = 1000
     // var canvas = d3.select('body').append('svg')
@@ -15,7 +68,8 @@
     //       .attr('width', width)
     //       .append('g')
     //         .attr('transform', 'translate(50,50)');
-
+    // var text = canvas.append('text')
+    //                 .text 'hi'
     // var pack = d3.layout.pack()
     //   .size([width, height - 50])
     //   .padding(10);
